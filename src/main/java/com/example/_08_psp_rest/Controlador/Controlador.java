@@ -22,19 +22,19 @@ public class Controlador {
     @PostMapping
     public ResponseEntity<String> crearVideojuego(@RequestBody Videojuego videojuego) {
         repoVideojuegos.save(videojuego);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Videojuego creado exitosamente");
+        return ResponseEntity.status(HttpStatus.CREATED).body("El videojuego se ha creado");
     }
 
     public ResponseEntity<String> borrarVideojuego(@PathVariable Long id) {
         repoVideojuegos.deleteById(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Videojuego eliminado exitosamente");
+        return ResponseEntity.status(HttpStatus.OK).body("El videojuego se ha borrado ");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> modificarVideojuego(@PathVariable Long id, @RequestBody Videojuego videojuego) {
         videojuego.setId(id);
         repoVideojuegos.save(videojuego);
-        return ResponseEntity.status(HttpStatus.OK).body("Videojuego modificado exitosamente");
+        return ResponseEntity.status(HttpStatus.OK).body("El videojuego se ha modificado");
     }
 
     @GetMapping("/{id}")
