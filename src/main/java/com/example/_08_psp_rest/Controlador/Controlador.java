@@ -13,37 +13,37 @@ import java.util.Optional;
 
 @Controller
 @RestController
-@RequestMapping("/videojuegos")
+@RequestMapping("/api")
 public class Controlador {
     @Autowired
     private VideoJuegoRepo repoVideojuegos;
 
-    @PostMapping
+    @PostMapping("/videojuego")
     public ResponseEntity<String> crearVideojuego(@RequestBody Videojuego videojuego) {
         repoVideojuegos.save(videojuego);
         return ResponseEntity.status(HttpStatus.CREATED).body("El videojuego se ha creado");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/videojuego/{id}")
     public ResponseEntity<String> borrarVideojuego(@PathVariable Long id) {
         repoVideojuegos.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("El videojuego se ha borrado ");
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/videojuego/{id}")
     public ResponseEntity<String> modificarVideojuego(@PathVariable Long id, @RequestBody Videojuego videojuego) {
         videojuego.setId(id);
         repoVideojuegos.save(videojuego);
         return ResponseEntity.status(HttpStatus.OK).body("El videojuego se ha modificado");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/videojuego/{id}")
     public ResponseEntity<Videojuego> obtenerVideojuego(@PathVariable Long id) {
         Optional<Videojuego> videojuego = repoVideojuegos.findById(id);
         return videojuego.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping
+    @GetMapping("/videojuegos/{id}")
     public ResponseEntity<Object> listarVideojuegos() {
         List<Videojuego> videojuegos = repoVideojuegos.findAll();
         return ResponseEntity.ok(videojuegos);
