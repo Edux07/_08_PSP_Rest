@@ -24,6 +24,7 @@ public class Controlador {
         return ResponseEntity.status(HttpStatus.CREATED).body("El videojuego se ha creado");
     }
 
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> borrarVideojuego(@PathVariable Long id) {
         repoVideojuegos.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("El videojuego se ha borrado ");
